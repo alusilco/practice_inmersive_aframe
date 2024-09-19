@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Copy 2 ECS - A-Frame School</title>
+    <meta name="description" content="Copy ECS - A-Frame School">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+        <video id="skyTexture" src="https://cdn.aframe.io/360-video-boilerplate/video/city.mp4" autoplay loop="true" muted="true" crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-entity id="lightSphere" geometry="primitive: sphere" material="color:white; shader: flat" light="type: point" position="-4 3 -10"
+                animation="property: position; from:-4 3 -10; to:4 3 -10; loop:true; dir:alternate;"></a-entity>
+
+      <a-entity geometry="primitive: box" material="color: red" position="0 0.5 -10">
+        <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" repeat="indefinite"></a-animation>
+      </a-entity>
+
+      <a-entity geometry="primitive: box" material="color: #E7DDFF" position="-2 0.5 -8"></a-entity>
+      <a-entity geometry="primitive: box" material="color: #C2620E" position="2 0.5 -8"></a-entity>
+      <a-entity geometry="primitive: box" material="color: #E44CB9" position="-4 0.5 -6"></a-entity>
+      <a-entity geometry="primitive: box" material="color: #FF0289" position="4 0.5 -6"></a-entity>
+      <a-videosphere src="#skyTexture" rotation="0 -90 0"></a-videosphere>
+
+      <a-entity light="type: ambient; color: #00ffff"></a-entity>
+      <a-entity light="type: directional; color: #111" position="-1 1 0"></a-entity>
+
+      <a-entity id="ground" geometry="primitive: plane; height: 100; width: 100" material="src: #groundTexture" rotation="-90 0 0"></a-entity>
+
+      <a-entity id="text" position="2.5 2 -8" scale="8 8 8"></a-entity>
+    </a-scene>
+  </body>
+</html>
