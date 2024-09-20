@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Boxes</title>
+    <meta name="description" content="JavaScript - A-Frame School" />
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script>
+      AFRAME.registerComponent("blood", {
+        schema: {
+          blood_type: { type: "string", default: "O-type" },
+          oxygen_level: { type: "string", default: "normal" }
+        },
+        init: function () {
+          let data = this.data;
+
+          this.el.addEventListener('click', (event) => {
+            let element = this.el.getAttribute('position');
+            let newY = element.y + 0.2;
+
+            // Actualizamos la posición y el atributo de sangre
+            this.el.setAttribute('position', element.x + " " + newY + " " + element.z);
+            this.el.setAttribute('blood', 'blood_type: B-type; oxygen_level: low');
+          });
+
+          console.log("--- INITIALISED ---");
+        },
+        update: function (oldData) {
+          console.log("oldData: " + oldData.blood_type);
+          console.log("--- UPDATED ---");
+          console.log("Current blood_type: " + this.data.blood_type);
+        },
+        tick: function () {
+          // Rotamos el elemento lentamente
+          this.el.getObject3D("mesh").rotation.y += 0.01;
+        }
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene>
+      <a-camera><a-cursor></a-cursor></a-camera>
+
+      <!-- Entidad Box1 con el componente "blood" -->
+      <a-entity id="Box1"
+        blood="blood_type: A-type; oxygen_level: high"
+        position="2 0.5 -3"
+        geometry="primitive: box"
+        material="color: blue">
+      </a-entity>
+
+      <!-- Otra entidad, Julian -->
+     <a-entity id="Julian"
+        blood="blood_type: B-type; oxygen_level: low"
+        position="0 0.5 -3"
+        geometry="primitive: box"
+        material="color: red">
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
