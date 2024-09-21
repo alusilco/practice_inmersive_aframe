@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PAPEERBALLOON STUDIOS</title>
+    <meta name="description" content="JavaScript A-Frame School" />
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene school-playground>
+      <a-camera raycaster="objects:.clickable">
+        <a-entity
+          cursor="fuse: true; fuseTimeout: 2000"
+          geometry="primitive: box; width: 0.1; height: 0.1; depth: 0.1;"
+          material="color: green;"
+          position="0 0 -2"
+          animation__fusing="property: scale; from: 1 1 1; to: 0.1 0.1 0.1; startEvents: fusing;"
+          animation__reset="property: scale; from: 0.1 0.1 0.1; to: 1 1 1; startEvents: mouseleave;"
+        >
+        </a-entity>
+      </a-camera>
+
+      <a-box
+        id="yellowBox"
+        position="-1.5 1.5 -3"
+        color="yellow"
+        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 2000; startEvents: click;"
+      >
+      </a-box>
+
+      <a-box
+        id="blueBox"
+        position="0 1.5 -3"
+        color="blue"
+        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 3000; startEvents: click;"
+      >
+        <a-image src="/images/dino.jpg" position="0 0 0.1" width="1" height="1" visible="false"></a-image>
+      </a-box>
+
+      <a-box
+        class="clickable"
+        id="redBox"
+        position="1.5 1.5 -3"
+        color="red"
+        animation="property: rotation; from: 0 0 0; to: 0 360 0; dur: 2000; startEvents: click;"
+      >
+        <a-entity
+          position="0 0 0.1"
+          geometry="primitive: plane; width: 1; height: 0.5;"
+          material="color: white;"
+        >
+          <a-image src="/images/dino.jpg" position="0 1 0.01" width="1" height="0.5" visible="false"></a-image>
+          <a-text value="Texto en la caja roja" color="black" position="0.5 1.5 0.01" align="center" visible="false"></a-text>
+        </a-entity>
+      </a-box>
+
+      <a-entity id="infoText" position="-1.5 2.5 -3" text="value: Clicked on yellow box!; color: black; align: center; visible: false;"></a-entity>
+    </a-scene>
+
+    <script>
+      
+      document.querySelector('#yellowBox').addEventListener('click', function () {
+        const textEntity = document.querySelector('#infoText');
+        textEntity.setAttribute('visible', true); 
+      });
+
+     
+      document.querySelector('#redBox').addEventListener('click', function () {
+        const redImage = document.querySelector('#redBox a-image');
+        const redText = document.querySelector('#redBox a-text');
+        redImage.setAttribute('visible', true);
+        redText.setAttribute('visible', true);
+      });
+    </script>
+  </body>
+</html>
